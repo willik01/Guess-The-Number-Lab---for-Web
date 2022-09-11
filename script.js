@@ -44,7 +44,34 @@ Your previous guesses: ${game.prevGuesses}`)
   }
 };
 
-// game.play()
+function recordGuess(playerGuess) {
+  const displayGuess = document.createElement("p");
+  displayGuess.className = "winnerDeclaration";
+  displayGuess.innerText = "You guessed " + playerGuess + ".";
+  // displayGuess.style.backgroundColor = "rgba(100, 100, 100)";
+  displayGuess.style.width = "250px";
+  document.getElementById('announcement').appendChild(displayGuess);
+
+  const gameStatus = document.createElement("p");
+  gameStatus.className = "winnerDeclaration";
+  gameStatus.innerText = playerGuess;
+  // gameStatus.style.backgroundColor = "rgba(130, 156, 170)";
+  gameStatus.style.width = "250px";
+  
+  document.getElementById('announcement').appendChild(gameStatus);
+
+}
+// using onload because it wasn't finding the ID previously
+window.onload = function(){
+  
+let submitGuess = document.getElementById("submitGuessBtn");
+let inputGuess ="";
+  
+submitGuess.addEventListener('click', event => {
+  inputGuess = document.getElementById("usersGuess").value;
+  recordGuess(inputGuess);
+  })          
+}
 
 
 // if (game.smallestNum <= guess <= game.biggestNum) { **WHY DOES THIS NOT WORK**  

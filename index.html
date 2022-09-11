@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  Hello world
+  
   <script src="script.js"></script>
 
  <!--
@@ -17,7 +17,20 @@
   page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
   teal, blue, blurple, magenta, pink!
   -->
-  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> 
+<!--   <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script>  -->
+<!--   pulling from rps game to connect js and HTML -->
+  
+  <h1>Welcome to the Guessing Game!</h1>
+  <br>
+  
+  <div id="instructions">Enter a number between ${game.biggestNum} and ${game.smallestNum}</div>  <br>
+  <div>
+  Your guess: <input type="text" id="usersGuess" placeholder="Make your guess..."><br><br>
+  <button id="submitGuessBtn">Submit Guess</button>
+  
+  <div id="announcement"></div>
+  </div>
+
 </body>
 
 </html>
