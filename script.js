@@ -1,3 +1,7 @@
+let submitGuess = null;  
+let inputGuess = null;
+let gameGuess = null;
+
 const game = {
   title: 'Guess the Number!',
   biggestNum: 100,
@@ -5,44 +9,54 @@ const game = {
   secretNum: null,
   prevGuesses: [],
   play: function() {
-    this.secretNum = Math.floor(Math.random() *
-      (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
-    //Get guess from user
-    game.getGuess();
-    // console.log(guess);
+            this.secretNum = Math.floor(Math.random() *
+              (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
+            //Get guess from user
+          
+            gameGuess = game.getGuessFromHTML();
+    console.log(`yo guessed ${gameGuess}`);
+            recordGuess(gameGuess);
+            // console.log(guess);
   },
-  getGuess: function() {
-    let guess = 0;
-
-    //guess must be numeric and between big/small number
-
-    while (guess !== this.secretNum) {
-      // while (guess !== this.secretNum && guess > game.smallestNum && guess < game.biggestNum) {
-      guess = parseInt(prompt(`Enter a guess between ${game.smallestNum} and ${game.biggestNum}:`));
-      game.prevGuesses.push(guess);
-      console.log(game.secretNum);
-
-      // return guess;
-      if (guess >= game.smallestNum && guess <= game.biggestNum) {
-        if (guess < game.secretNum) {
-          console.log(`your guess is too low.
-Your previous guesses: ${game.prevGuesses}`)
-
-        } else if (guess > game.secretNum) {
-          console.log(`your guess is too high.
-Your previous guesses: ${game.prevGuesses}`)
-
-        } else if (guess == game.secretNum) {
-          console.log(`winner, winner, Chicken Dinner! You picked ${guess} and the secret number is ${game.secretNum}. You used ${game.prevGuesses.length} guesses.`)
-        }
-
-      } else {
-        console.log(`That's out of bounds. Please pick a number between ${game.smallestNum} and ${game.biggestNum}`)
-      }
-    }
-    // return guess;
+  getGuess: function(guess) {
+            // let guess = 0;
+            //guess must be numeric and between big/small number
+            while (guess !== this.secretNum) {
+              // while (guess !== this.secretNum && guess > game.smallestNum && guess < game.biggestNum) {
+              guess = parseInt(prompt(`Enter a guess between ${game.smallestNum} and ${game.biggestNum}:`));
+              game.prevGuesses.push(guess);
+              console.log(game.secretNum);
+        
+              // return guess;
+              if (guess >= game.smallestNum && guess <= game.biggestNum) {
+                if (guess < game.secretNum) {
+                  console.log(`your guess is too low.
+        Your previous guesses: ${game.prevGuesses}`)
+        
+                } else if (guess > game.secretNum) {
+                  console.log(`your guess is too high.
+        Your previous guesses: ${game.prevGuesses}`)
+        
+                } else if (guess == game.secretNum) {
+                  console.log(`winner, winner, Chicken Dinner! You picked ${guess} and the secret number is ${game.secretNum}. You used ${game.prevGuesses.length} guesses.`)
+                }
+        
+              } else {
+                console.log(`That's out of bounds. Please pick a number between ${game.smallestNum} and ${game.biggestNum}`)
+              }
+            }
+            // return guess?;
+  },
+  getGuessFromHTML: function() {
+    submitGuess = document.getElementById("submitGuessBtn");
+    submitGuess.addEventListener('click', event => {
+    inputGuess = document.getElementById("usersGuess").value;
+    return inputGuess;  
+    })        
   }
 };
+
+
 
 function recordGuess(playerGuess) {
   const displayGuess = document.createElement("p");
@@ -62,15 +76,28 @@ function recordGuess(playerGuess) {
 
 }
 // using onload because it wasn't finding the ID previously
+// get the button for submitting guesses
+
+
+// window.onload = function(){
+//   submitGuess = document.getElementById("submitGuessBtn");
+//   submitGuess = document.getElementById("submitGuessBtn");
+//   submitGuess.addEventListener('click', event => {
+//     inputGuess = document.getElementById("usersGuess").value;
+// })
+// };
+  
+
+  // function getGuessFromHTML () {
+  //   submitGuess = document.getElementById("submitGuessBtn");
+  //   submitGuess.addEventListener('click', event => {
+  //   inputGuess = document.getElementById("usersGuess").value;
+  //   return guess;  
+  //   })          
+  // }
+
 window.onload = function(){
-  
-let submitGuess = document.getElementById("submitGuessBtn");
-let inputGuess ="";
-  
-submitGuess.addEventListener('click', event => {
-  inputGuess = document.getElementById("usersGuess").value;
-  recordGuess(inputGuess);
-  })          
+  game.play();
 }
 
 
